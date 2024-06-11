@@ -91,9 +91,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const doc = parser.parseFromString(html, 'text/html');
                 const links = doc.querySelectorAll('.display-name a');
 
+                const validImageExtensions = ['.jpeg', '.jpg', '.png', '.gif'];
+
                 links.forEach(link => {
                     const url = new URL(link.getAttribute('href'), IMAGE_BASE_URL);
-                    imageUrls.push(url.href);
+                    const extension = url.pathname.split('.').pop().toLowerCase();
+                    if (validImageExtensions.includes(`.${extension}`)) {
+                        imageUrls.push(url.href);
+                    }
                 });
 
                 console.log(imageUrls);

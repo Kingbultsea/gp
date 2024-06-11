@@ -1,39 +1,129 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gallery-Portfolio</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="gallery.css" />
-    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
-  </head>
-  <body>
-    <header>
-      <h1>东馆图片库</h1>
-      <div class="header-buttons">
-        <button id="theme-toggle">
-          <img
-            src="/assets/brightness_4.svg"
-            alt="Toggle Theme"
-            id="theme-icon"
-          />
-        </button>
-      </div>
-    </header>
-    <div id="loading"></div>
-    <div class="gallery" id="gallery"></div>
-    <button id="load-more" class="load-more">加载更多</button>
 
-    <!-- Modal for image display -->
-    <div id="myModal" class="modal">
-      <span class="close">&times;</span>
-      <img class="modal-content" id="img01" />
-      <div id="exif-info"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery-Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="gallery.css" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+</head>
+
+<body>
+  <header>
+    <h1>东馆图片库</h1>
+    <div class="header-buttons">
+      <button id="upload-btn">
+        <h3>上传文件</h3>
+      </button>
+      <button id="theme-toggle">
+        <img src="/assets/brightness_4.svg" alt="Toggle Theme" id="theme-icon" />
+      </button>
     </div>
+  </header>
+  <div id="loading"></div>
+  <div class="gallery" id="gallery"></div>
+  <button id="load-more" class="load-more">加载更多</button>
 
-    <script src="layout.js"></script>
-    <script src="gallery.js"></script>
-    <script src="exif.js"></script>
-  </body>
+  <!-- Modal for image display -->
+  <div id="myModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img01" />
+    <div id="exif-info"></div>
+  </div>
+
+  <!-- Upload Modal -->
+  <div id="uploadModal" class="modal">
+    <span class="close" id="closeUploadModal">&times;</span>
+    <h1 style="color: white;">上传文件</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <input type="file" name="files" multiple>
+      <button type="submit">点击上传</button>
+    </form>
+  </div>
+
+  <script src="layout.js"></script>
+  <script src="gallery.js"></script>
+  <script src="exif.js"></script>
+  <script>
+    // Get the modal
+    var uploadModal = document.getElementById("uploadModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("upload-btn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementById("closeUploadModal");
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+      uploadModal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+      uploadModal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == uploadModal) {
+        uploadModal.style.display = "none";
+      }
+    }
+  </script>
+
+  <style>
+    /* Add this to your gallery.css or styles.css */
+
+    .modal {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      /* Stay in place */
+      z-index: 1;
+      /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%;
+      /* Full width */
+      height: 100%;
+      /* Full height */
+      overflow: auto;
+      /* Enable scroll if needed */
+      background-color: rgb(0, 0, 0);
+      /* Fallback color */
+      background-color: rgba(0, 0, 0, 0.4);
+      /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      /* 15% from the top and centered */
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      /* Could be more or less, depending on screen size */
+    }
+
+    /* The Close Button */
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+</body>
+
 </html>

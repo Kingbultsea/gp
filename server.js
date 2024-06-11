@@ -1,4 +1,5 @@
 const express = require('express');
+const multer = require('multer');
 const { S3Client, GetObjectCommand, PutObjectCommand, ListObjectsCommand, HeadObjectCommand } = require('@aws-sdk/client-s3');
 const sharp = require('sharp');
 const dotenv = require('dotenv');
@@ -9,6 +10,44 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+// 配置 multer
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, '/Users/starlink_brench01/Desktop/github_project/images/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
+
+// 文件过滤功能，只接受图片类型的文件
+const fileFilter = (req, file, cb) => {
+  const filetypes = /jpeg|jpg|png|gif/;
+  const mimetype = filetypes.test(file.mimetype);
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+
+  if (mimetype && extname) {
+    return cb(null, true);
+  } else {
+    cb(new Error('Only images are allowed'));
+  }
+};
+
+const upload = multer({
+  storage: storage,
+  fileFilter: fileFilter
+});
+
+app.use(express.static('public'));
+
+app.post('/upload', upload.array('files', 10), (req, res) => {
+  // 检查是否有文件上传
+  if (!req.files || req.files.length === 0) {
+    return res.status(400).send('No files were uploaded.');
+  }
+  res.send('Files uploaded successfully');
+});
 
 const s3Client = new S3Client({
   region: process.env.R2_REGION,

@@ -8,17 +8,24 @@ body {
   padding: 0;
   background-color: #f0f0f0;
   transition: background-color 0.3s, color 0.3s;
-  min-height: 100vh; /* Ensures footer is at the bottom */
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* iOS Safari */
-  -webkit-touch-callout: none; /* Disable callout, image save panel (iOS Safari) */
-  user-select: none; /* Disable text selection */
-  -ms-touch-action: manipulation; /* IE 10 */
-  touch-action: manipulation; /* Non-prefixed version, currently supported by Chrome, Edge, and Firefox */
+  min-height: 100vh;
+  /* Ensures footer is at the bottom */
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  /* iOS Safari */
+  -webkit-touch-callout: none;
+  /* Disable callout, image save panel (iOS Safari) */
+  user-select: none;
+  /* Disable text selection */
+  -ms-touch-action: manipulation;
+  /* IE 10 */
+  touch-action: manipulation;
+  /* Non-prefixed version, currently supported by Chrome, Edge, and Firefox */
 }
 
 header {
   width: 100%;
-  background-color: #000000; /* 深绿色 */
+  background-color: #000000;
+  /* 深绿色 */
   color: white;
   padding: 15px 20px;
   display: flex;
@@ -44,6 +51,7 @@ header h1 {
   align-items: center;
   align-items: baseline;
   transition: font-size 0.3s ease-in-out;
+  align-items: center;
 }
 
 header a {
@@ -79,13 +87,17 @@ header a img {
 
 footer {
   width: 100%;
-  background-color: #000000; /* 深绿色 */
+  background-color: #000000;
+  /* 深绿色 */
   color: white;
   text-align: center;
   padding: 10px 0;
-  margin-top: auto; /* Pushes footer to the bottom */
-  opacity: 0; /* Start hidden */
-  transition: opacity 1s; /* Fade-in effect */
+  margin-top: auto;
+  /* Pushes footer to the bottom */
+  opacity: 0;
+  /* Start hidden */
+  transition: opacity 1s;
+  /* Fade-in effect */
 }
 
 footer a {
@@ -96,20 +108,24 @@ footer a {
 .load-more {
   padding: 10px 20px;
   margin: 20px 0;
-  background-color: #000000; /* 深绿色 */
+  background-color: #000000;
+  /* 深绿色 */
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s, opacity 1s; /* Fade-in effect for the button */
-  opacity: 0; /* Start hidden */
+  transition: background-color 0.3s, opacity 1s;
+  /* Fade-in effect for the button */
+  opacity: 0;
+  /* Start hidden */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .load-more.loading {
-  background-color: #a0a0a0; /* 灰色 */
+  background-color: #a0a0a0;
+  /* 灰色 */
   cursor: not-allowed;
 }
 
@@ -128,6 +144,7 @@ footer a {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -175,12 +192,15 @@ body.dark footer {
     height: 2.07em;
     padding: 10px 15px;
   }
+
   header h1 {
     font-size: 1.5em;
   }
+
   header a {
     font-size: 24px;
   }
+
   header button {
     margin-right: 30px;
   }
@@ -191,12 +211,15 @@ body.dark footer {
     height: 2.085em;
     padding: 15px 20px;
   }
+
   header h1 {
     font-size: 1.75em;
   }
+
   header a {
     font-size: 24px;
   }
+
   header button {
     margin-right: 40px;
   }
@@ -207,12 +230,15 @@ body.dark footer {
     height: 2.1em;
     padding: 20px 30px;
   }
+
   header h1 {
     font-size: 2em;
   }
+
   header a {
     font-size: 24px;
   }
+
   header button {
     margin-right: 50px;
   }
