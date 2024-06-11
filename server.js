@@ -5,16 +5,18 @@ const sharp = require('sharp');
 const dotenv = require('dotenv');
 const path = require('path');
 const exifParser = require('exif-parser');
+const args = process.argv.slice(2);
+const fs = require('fs');
 
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = 3000;
 
 // 配置 multer
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, '/Users/starlink_brench01/Desktop/github_project/images/');
+    cb(null, args[0] || '../images/');
   },
   filename: (req, file, cb) => {
     cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
@@ -38,6 +40,15 @@ const upload = multer({
   storage: storage,
   fileFilter: fileFilter
 });
+
+// 读取 index.html 并替换占位符
+const indexPath = path.join(__dirname, 'public', 'index_template.html');
+let indexContent = fs.readFileSync(indexPath, 'utf8');
+indexContent = indexContent.replace('__IMAGE_BASE_URL__', args[1] || "http://localhost:8080");
+
+// 将修改后的内容写入临时文件
+const tempIndexPath = path.join(__dirname, 'public', 'index.html');
+fs.writeFileSync(tempIndexPath, indexContent);
 
 app.use(express.static('public'));
 
@@ -166,6 +177,23 @@ app.get('/config', (req, res) => {
   res.json({ IMAGE_BASE_URL: process.env.R2_IMAGE_BASE_URL });
 });
 
+const os = require('os');
+
+// 获取本机 IP 地址
+function getIPAddress() {
+  const interfaces = os.networkInterfaces();
+  for (const devName in interfaces) {
+    const iface = interfaces[devName];
+    for (let i = 0; i < iface.length; i++) {
+      const alias = iface[i];
+      if (alias.family === 'IPv4' && !alias.internal) {
+        return alias.address;
+      }
+    }
+  }
+  return '127.0.0.1';
+}
+
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server is running on http://${getIPAddress()}:${port}`);
 });

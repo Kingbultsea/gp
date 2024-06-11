@@ -1,12 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
-    let IMAGE_BASE_URL;
+    let IMAGE_BASE_URL = window.IMAGE_BASE_URL;
+    console.log(IMAGE_BASE_URL + "url");
     let columns = 3; // Default number of columns
     let imagesPerLoad = 10; // Default images per load
     const SCROLL_THRESHOLD = 100; // Scroll threshold to start hiding the header
     let currentImageRequest = null; // Variable to hold the current image request
     let currentExifRequest = null; // Variable to hold the current EXIF request
 
-    IMAGE_BASE_URL = "http://192.168.1.93:8080"
+    // IMAGE_BASE_URL = "http://192.168.1.93:8080"
 
     // // Fetch configuration from server
     // fetch('/config')
@@ -100,6 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         imageUrls.push(url.href);
                     }
                 });
+
+                imageUrls.reverse();
 
                 console.log(imageUrls);
 
