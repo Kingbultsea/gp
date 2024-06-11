@@ -1,4 +1,4 @@
-http-server -p 8080 --cors
+http-server -p 8080 --cors -c-1
 
 
 node server.js
