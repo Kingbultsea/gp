@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const totalImagesToLoad = Math.min(currentIndex, imageUrls.length);
             if (imagesLoadedCount >= totalImagesToLoad) {
                 document.querySelector('.gallery').style.opacity = '1'; // Show gallery
-                document.querySelector('footer').style.opacity = '1'; // Show footer
+                document.querySelector('footer').style.opacity = '0'; // Show footer
                 loadMoreButton.style.opacity = '1'; // Show load more button
                 loadingElement.classList.add('hidden'); // Hide loading animation
             }
