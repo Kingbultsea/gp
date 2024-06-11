@@ -57,7 +57,6 @@
   margin: auto;
   margin-top: 100px; /* Top margin */
   display: block;
-  max-width: 90%;
   max-height: 80%; /* Adjust to accommodate caption and exif-info */
   width: auto;
   height: auto;
