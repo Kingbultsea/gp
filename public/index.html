@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery-Portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="gallery.css" />
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <header>
+      <h1>图片库</h1>
+      <div class="header-buttons">
+        <button id="theme-toggle">
+          <img
+            src="/assets/brightness_4.svg"
+            alt="Toggle Theme"
+            id="theme-icon"
+          />
+        </button>
+      </div>
+    </header>
+    <div id="loading"></div>
+    <div class="gallery" id="gallery"></div>
+    <button id="load-more" class="load-more">加载更多</button>
+
+    <!-- Modal for image display -->
+    <div id="myModal" class="modal">
+      <span class="close">&times;</span>
+      <img class="modal-content" id="img01" />
+      <div id="exif-info"></div>
+    </div>
+
+    <script src="layout.js"></script>
+    <script src="gallery.js"></script>
+    <script src="exif.js"></script>
+  </body>
+</html>
